@@ -1,4 +1,18 @@
 import os
+from flask import Flask
+from threading import Thread
+
+web_app = Flask(__name__)
+
+@web_app.route("/")
+def home():
+    return "Bot is running"
+
+def run_web():
+    port = int(os.environ.get("PORT", 10000))
+    web_app.run(host="0.0.0.0", port=port)
+
+Thread(target=run_web, daemon=True).start()
 import json
 from pathlib import Path
 from datetime import datetime
