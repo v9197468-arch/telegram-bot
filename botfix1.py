@@ -19,7 +19,7 @@ from telegram.ext import (
 BOT_TOKEN = "8296396857:AAFb0LdFgWbAbsGI8ruz2h_XcqAEmufM-xY"
 ADMIN_ID = 7894377511
 DATA_FILE = Path("data.json")
-START_IMAGE = Path("start.jpg")
+START_IMAGE = Path("d3e540ff-0d1b-44a1-9305-fd9c564a9d5c.png")
 
 flask_app = Flask(__name__)
 
@@ -202,9 +202,7 @@ def is_admin(chat_id: int) -> bool:
 
 
 # --------- commands ---------
-async def myid(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(f"🆔 Твій chat_id: {update.effective_chat.id}")
-    async def photo_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def photo_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_admin(update.effective_chat.id):
         return
 
