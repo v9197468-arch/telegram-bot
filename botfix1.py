@@ -262,14 +262,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     data = load_data()
     ensure_user(data, user_id)
 
-    # save profile
     user = update.effective_user
     username = user.username or "no_username"
     name = user.first_name or "NoName"
+
     data["users"][user_id]["profile"] = {"username": username, "name": name}
-
-    save_data(data)
-
     data["users"][user_id]["last_active"] = now_iso()
     save_data(data)
 
@@ -287,14 +284,21 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "аналізуєте та приймаєте рішення.</b>"
     )
 
-    if START_IMAGE.exists():
-        with START_IMAGE.open("rb") as photo:
+    try:
+        with open("start.jpg", "rb") as photo:
             await update.message.reply_photo(
                 photo=photo,
                 caption=start_text,
                 parse_mode="HTML",
                 reply_markup=kb_main(),
             )
+    except Exception as e:
+        print(f"START PHOTO ERROR: {e}")
+        await update.message.reply_text(
+            start_text,
+            parse_mode="HTML",
+            reply_markup=kb_main(),
+        )
     else:
         await update.message.reply_text(
             start_text,
