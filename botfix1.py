@@ -285,7 +285,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
     try:
-       with open(Path(__file__).with_name("start.jpg"), "rb") as photo:
+       with open(Path(__file__).with_name("d3e540ff-0d1b-44a1-9305-fd9c564a9d5c.png"), "rb") as photo:
             await update.message.reply_photo(photo=photo)
     except Exception as e:
         print(f"START PHOTO ERROR: {e}")
