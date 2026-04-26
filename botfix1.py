@@ -204,6 +204,16 @@ def is_admin(chat_id: int) -> bool:
 # --------- commands ---------
 async def myid(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"🆔 Твій chat_id: {update.effective_chat.id}")
+    async def photo_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_admin(update.effective_chat.id):
+        return
+
+    if not update.message.photo:
+        await update.message.reply_text("Пришли картинку как фото.")
+        return
+
+    file_id = update.message.photo[-1].file_id
+    await update.message.reply_text(f"FILE_ID:\n{file_id}")
 
 
 async def users_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -627,6 +637,7 @@ def main():
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("myid", myid))
     app.add_handler(CommandHandler("users", users_cmd))
+    app.add_handler(MessageHandler(filters.PHOTO, photo_id))
     app.add_handler(CommandHandler("broadcast", broadcast))
     app.add_handler(CallbackQueryHandler(on_button))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, on_text))
