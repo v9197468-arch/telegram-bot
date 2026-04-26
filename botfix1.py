@@ -286,6 +286,18 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     try:
         with open("start.jpg", "rb") as photo:
+            await update.message.reply_photo(photo=photo)
+    except Exception as e:
+        print(f"START PHOTO ERROR: {e}")
+
+    await update.message.reply_text(
+        start_text,
+        parse_mode="HTML",
+        reply_markup=kb_main(),
+    )
+
+    try:
+        with open("start.jpg", "rb") as photo:
             await update.message.reply_photo(
                 photo=photo,
                 caption=start_text,
