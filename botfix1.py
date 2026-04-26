@@ -16,8 +16,8 @@ from telegram.ext import (
 )
 
 # ✅ БЕЗПЕЧНО: токен і адмінка з ENV
-BOT_TOKEN = os.getenv("BOT_TOKEN", "")
-ADMIN_ID = int(os.getenv("ADMIN_ID", "7894377511"))
+BOT_TOKEN = "8296396857:AAFb0LdFgWbAbsGI8ruz2h_XcqAEmufM-xY"
+ADMIN_ID = 7894377511
 DATA_FILE = Path("data.json")
 START_IMAGE = Path("start.jpg")
 
